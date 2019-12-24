@@ -5,12 +5,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private const float VerticalSpeed = 0f;
-    [SerializeField] private int _coins;
     [SerializeField] private float _horizontalSpeed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private GroundChecker _groundChecker;
-    public event Action<int> CoinCollected;
+
+    public int Coins { get; private set; }
+
+    public event Action CoinCollected;
 
     private void Start() => SetSpeed();
 
@@ -38,17 +40,9 @@ public class Player : MonoBehaviour
 
     private void CollectCoin(Coin coin)
     {
-        _coins += coin.Value;
-        Destroy(coin.gameObject);
+        Coins += coin.Value;
+        CoinCollected?.Invoke();
 
-        OnCoinCollected();
-    }
-
-    private void OnCoinCollected()
-    {
-        if (CoinCollected != null)
-        {
-            CoinCollected(_coins);
-        }
+        coin.gameObject.SetActive(false);
     }
 }

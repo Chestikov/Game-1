@@ -9,10 +9,22 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private GroundChecker _groundChecker;
+    
+    public event Action CoinsAmountChanged;
 
-    public int Coins { get; private set; }
+    public int Coins
+    {
+        get
+        {
+            return Coins;
+        }
+        private set
+        {
+            Coins = value;
 
-    public event Action CoinCollected;
+            CoinsAmountChanged?.Invoke();
+        }
+    }
 
     private void Start() => SetSpeed();
 
@@ -41,7 +53,6 @@ public class Player : MonoBehaviour
     private void CollectCoin(Coin coin)
     {
         Coins += coin.Value;
-        CoinCollected?.Invoke();
 
         coin.gameObject.SetActive(false);
     }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Coin : SpawnedItem
 {
     [SerializeField] private int _value = 1;
     public int Value

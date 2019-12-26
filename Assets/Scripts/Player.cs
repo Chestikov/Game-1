@@ -9,18 +9,18 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private GroundChecker _groundChecker;
-    
+    private int _coins;
     public event Action CoinsAmountChanged;
 
     public int Coins
     {
         get
         {
-            return Coins;
+            return _coins;
         }
         private set
         {
-            Coins = value;
+            _coins = value;
 
             CoinsAmountChanged?.Invoke();
         }

@@ -18,25 +18,25 @@ public abstract class Spawner : MonoBehaviour
         _ItemWidth = _spawnItemPrefab.GetComponent<Renderer>().bounds.size.x;
         _currentSpawnPosition = _startSpawnPosition;
 
+        InitialSpawn();
+    }
+
+    protected virtual void InitialSpawn()
+    {
         for (int i = 0; i < _itemsPerScreen; i++)
         {
             SpawnedItem newItem = Instantiate(_spawnItemPrefab, _currentSpawnPosition, Quaternion.identity, gameObject.transform);
-            newItem.ItemDisabled += item => _items.Enqueue(item);
+            newItem.RespawnRequested += Spawn;
 
             ChangeSpawnPosition();
         }
     }
 
-    private void Update()
+    protected virtual void Spawn(SpawnedItem itemToSpawn)
     {
-        if (_items.Count != 0)
-        {
-            var item = _items.Dequeue();
-            item.transform.position = _currentSpawnPosition;
-            item.gameObject.SetActive(true);
+        itemToSpawn.transform.position = _currentSpawnPosition;
 
-            ChangeSpawnPosition();
-        }
+        ChangeSpawnPosition();
     }
 
     protected virtual Vector2 GetMinOffsetBetweenItems() => new Vector2(_ItemWidth, 0);

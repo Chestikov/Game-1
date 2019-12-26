@@ -3,16 +3,9 @@ using UnityEngine;
 
 public class SpawnedItem : MonoBehaviour
 {
-    public event Action<SpawnedItem> ItemDisabled;
+    public event Action<SpawnedItem> RespawnRequested;
 
-    [ExecuteInEditMode]
-    protected void OnDisable()
-    {
-        ItemDisabled?.Invoke(this);
-    }
+    public void RespawnRequest() => RespawnRequested?.Invoke(this);
 
-    protected void OnBecameInvisible()
-    {
-        gameObject.SetActive(false);
-    }
+    protected void OnBecameInvisible() => RespawnRequest();
 }

@@ -54,6 +54,6 @@ public class Player : MonoBehaviour
     {
         Coins += coin.Value;
 
-        coin.gameObject.SetActive(false);
+        coin.RespawnRequest();
     }
 }

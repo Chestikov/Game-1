@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private GroundChecker _groundChecker;
     private int _coins;
+
     public event Action CoinsAmountChanged;
+    public event Action PlayerDied;
 
     public int Coins
     {
@@ -23,6 +25,13 @@ public class Player : MonoBehaviour
 
             CoinsAmountChanged?.Invoke();
         }
+    }
+
+    public void Die()
+    {
+        gameObject.SetActive(false);
+
+        PlayerDied?.Invoke();
     }
 
     private void Start() => SetSpeed();

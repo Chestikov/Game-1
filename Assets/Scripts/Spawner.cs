@@ -1,15 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public abstract class Spawner : MonoBehaviour
 {
     [SerializeField] protected Vector2 _startSpawnPosition;
     [SerializeField] protected SpawnedItem _spawnItemPrefab;
-    [SerializeField] protected Vector2 _offsetBetweenItems;
     [SerializeField] protected int _itemsPerScreen;
     protected Vector2 _currentSpawnPosition;
     protected float _ItemWidth;
+
+    protected Vector2 CurrentSpawnPosition
+    {
+        get
+        {
+            var spawnPosition = _currentSpawnPosition;
+            ChangeSpawnPosition();
+            return spawnPosition;
+        }
+    }
 
     protected void Start()
     {
@@ -23,7 +30,7 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i < _itemsPerScreen; i++)
         {
-            Vector2 spawnPosition = GetSpawnPosition();
+            Vector2 spawnPosition = CurrentSpawnPosition;
             SpawnedItem newItem = Instantiate(_spawnItemPrefab, spawnPosition, Quaternion.identity, gameObject.transform);
             newItem.RespawnRequested += Spawn;
         }
@@ -31,24 +38,10 @@ public class Spawner : MonoBehaviour
 
     protected virtual void Spawn(SpawnedItem itemToSpawn)
     {
-        Debug.Log(_currentSpawnPosition);
-        itemToSpawn.transform.position = GetSpawnPosition();
+        itemToSpawn.transform.position = CurrentSpawnPosition;
     }
 
     protected virtual Vector2 GetMinOffsetBetweenItems() => new Vector2(_ItemWidth, 0);
 
-    protected virtual void ChangeSpawnPosition()
-    {
-        Vector2 nextItemOffset = _offsetBetweenItems + GetMinOffsetBetweenItems();
-        Vector2 newSpawnPosition = _currentSpawnPosition + nextItemOffset;
-
-        _currentSpawnPosition = newSpawnPosition;
-    }
-
-    protected Vector2 GetSpawnPosition()
-    {
-        var spawnPosition = _currentSpawnPosition;
-        ChangeSpawnPosition();
-        return spawnPosition;
-    }
+    protected abstract void ChangeSpawnPosition();
 }

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GroundSpawner : Spawner
+﻿public class GroundSpawner : Spawner
 {
-    
+    protected override void ChangeSpawnPosition() => _currentSpawnPosition += GetMinOffsetBetweenItems();
 }

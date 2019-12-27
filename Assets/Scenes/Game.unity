@@ -166,7 +166,6 @@ MonoBehaviour:
   _startSpawnPosition: {x: 0, y: -4}
   _spawnItemPrefab: {fileID: 4568551686702669993, guid: d5f6d1aa3daa52340b0792069d508989,
     type: 3}
-  _offsetBetweenItems: {x: 0, y: 0}
   _itemsPerScreen: 2
 --- !u!1 &243070096
 GameObject:
@@ -563,14 +562,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1828363898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b152e5a711397b843932ba839f7eb39e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6efc0ec1dce3a864ca098f004a703b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startSpawnPosition: {x: 0, y: -2}
+  _startSpawnPosition: {x: 0, y: -2.5}
   _spawnItemPrefab: {fileID: -5249909337630753523, guid: f2a99ac2cb0132448aaaae111f95d939,
     type: 3}
-  _offsetBetweenItems: {x: 1.5, y: 0}
-  _itemsPerScreen: 15
+  _itemsPerScreen: 10
+  _offsetBetweenItems: {x: 0, y: 0}
 --- !u!1 &1885255684
 GameObject:
   m_ObjectHideFlags: 0

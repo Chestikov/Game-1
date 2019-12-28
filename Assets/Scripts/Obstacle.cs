@@ -1,8 +1,10 @@
-﻿public class Obstacle :  SpawnedItem
+﻿using UnityEngine;
+
+public class Obstacle : SpawnedItem
 {
-    private void OnCollisionEnter2D(UnityEngine.Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        var player = collision.gameObject.GetComponent<Player>();
+        Player player = collision.gameObject.GetComponent<Player>();
 
         if (player)
         {

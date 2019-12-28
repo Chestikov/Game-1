@@ -1,28 +1,13 @@
 ﻿using UnityEngine;
 
-public abstract class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
-    [SerializeField] protected Vector2 _startSpawnPosition;
     [SerializeField] protected SpawnedItem _spawnItemPrefab;
     [SerializeField] protected int _itemsPerScreen;
-    protected Vector2 _currentSpawnPosition;
-    protected float _ItemWidth;
-
-    protected Vector2 CurrentSpawnPosition
-    {
-        get
-        {
-            var spawnPosition = _currentSpawnPosition;
-            ChangeSpawnPosition();
-            return spawnPosition;
-        }
-    }
+    [SerializeField] protected PivotPositionCalculator _pivotPositionCalculator;
 
     protected void Start()
     {
-        _ItemWidth = _spawnItemPrefab.GetComponent<Renderer>().bounds.size.x;
-        _currentSpawnPosition = _startSpawnPosition;
-
         InitialSpawn();
     }
 
@@ -30,7 +15,7 @@ public abstract class Spawner : MonoBehaviour
     {
         for (int i = 0; i < _itemsPerScreen; i++)
         {
-            Vector2 spawnPosition = CurrentSpawnPosition;
+            Vector2 spawnPosition = _pivotPositionCalculator.GetNextPivotPosition();
             SpawnedItem newItem = Instantiate(_spawnItemPrefab, spawnPosition, Quaternion.identity, gameObject.transform);
             newItem.RespawnRequested += Spawn;
         }
@@ -38,10 +23,6 @@ public abstract class Spawner : MonoBehaviour
 
     protected virtual void Spawn(SpawnedItem itemToSpawn)
     {
-        itemToSpawn.transform.position = CurrentSpawnPosition;
+        itemToSpawn.transform.position = _pivotPositionCalculator.GetNextPivotPosition();
     }
-
-    protected virtual Vector2 GetMinOffsetBetweenItems() => new Vector2(_ItemWidth, 0);
-
-    protected abstract void ChangeSpawnPosition();
 }

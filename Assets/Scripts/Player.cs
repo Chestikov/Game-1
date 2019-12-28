@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private GroundChecker _groundChecker;
+    [SerializeField] private KeyCode _jumpKey;
     private int _coins;
 
     public event Action CoinsAmountChanged;
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _groundChecker.CanJump())
+        if (Input.GetKeyDown(_jumpKey) && _groundChecker.CanJump())
         {
             Jump();
         }

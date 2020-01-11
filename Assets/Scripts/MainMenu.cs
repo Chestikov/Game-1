@@ -5,7 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private int GameSceneIndex;
 
-    public void PlayGame() => SceneManager.LoadScene(GameSceneIndex);
+    public void OnPlayButtonClick() => SceneManager.LoadScene(GameSceneIndex);
 
-    public void QuitGame() => Application.Quit();
+    public void OnQuitButtonClick() => Application.Quit();
 }

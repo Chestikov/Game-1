@@ -383,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnItemPrefab: {fileID: -5249909337630753523, guid: f2a99ac2cb0132448aaaae111f95d939,
     type: 3}
-  _itemsPerScreen: 10
+  _itemsPerScreen: 5
   _pivotPositionCalculator: {fileID: 432293022}
   _offsetBetweenItems: {x: 1, y: 0}
   _maxPositionVariation: {x: 0, y: 1}
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f1be71e36de6b4fb554c9af5d67a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTransform: {fileID: 2128173553}
+  _target: {fileID: 2128173553}
 --- !u!114 &1118971585
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-public class CameraMovement : MonoBehaviour
+public class FollowTarget : MonoBehaviour
 {
-    [SerializeField] private Transform _targetTransform;
+    [SerializeField] private Transform _target;
     private Vector3 _offset;
 
     private void Start()
     {
-        _offset = _targetTransform.position - transform.position;
+        _offset = _target.position - transform.position;
     }
 
     private void Update()
@@ -17,7 +17,7 @@ public class CameraMovement : MonoBehaviour
 
     private void FollowTargetHorizontally()
     {
-        Vector3 newPosition = _targetTransform.position - _offset;
+        Vector3 newPosition = _target.position - _offset;
 
         transform.position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
     }

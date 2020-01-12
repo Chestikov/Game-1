@@ -9,24 +9,11 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private GroundChecker _groundChecker;
     [SerializeField] private KeyCode _jumpKey;
-    private int _coins;
 
     public event Action CoinsAmountChanged;
     public event Action PlayerDied;
 
-    public int Coins
-    {
-        get
-        {
-            return _coins;
-        }
-        private set
-        {
-            _coins = value;
-
-            CoinsAmountChanged?.Invoke();
-        }
-    }
+    public int Coins { get; private set; }
 
     public void Die()
     {
@@ -61,8 +48,15 @@ public class Player : MonoBehaviour
 
     private void CollectCoin(Coin coin)
     {
-        Coins += coin.Value;
+        ChangeCoinsAmount(coin.Value);
 
         coin.RespawnRequest();
+    }
+
+    private void ChangeCoinsAmount (int value)
+    {
+        Coins += value;
+
+        CoinsAmountChanged?.Invoke();
     }
 }

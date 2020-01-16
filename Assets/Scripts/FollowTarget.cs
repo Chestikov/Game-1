@@ -7,7 +7,7 @@ public class FollowTarget : MonoBehaviour
 
     private void Start()
     {
-        _offset = _target.position - transform.position;
+        _offset = transform.position - _target.position;
     }
 
     private void Update()
@@ -17,7 +17,7 @@ public class FollowTarget : MonoBehaviour
 
     private void FollowTargetHorizontally()
     {
-        Vector3 newPosition = _target.position - _offset;
+        Vector3 newPosition = _target.position + _offset;
 
         transform.position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
     }

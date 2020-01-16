@@ -2,7 +2,6 @@
 
 public class CoinSpawner : Spawner
 {
-    [SerializeField] private Vector2 _offsetBetweenItems;
     [SerializeField] private Vector2 _maxPositionVariation;
 
     protected override void Spawn(SpawnedItem itemToSpawn)

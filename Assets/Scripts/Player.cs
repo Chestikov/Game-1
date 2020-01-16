@@ -22,19 +22,19 @@ public class Player : MonoBehaviour
         PlayerDied?.Invoke();
     }
 
-    private void Start() => SetSpeed();
+    private void Start() => ApplySpeed();
 
     private void Update()
     {
-        if (Input.GetKeyDown(_jumpKey) && _groundChecker.CanJump())
+        if (Input.GetKeyDown(_jumpKey) && _groundChecker.IsOnGround())
         {
-            Jump();
+            Jump(_jumpForce);
         }
     }
 
-    private void SetSpeed() => _rigidbody.velocity = new Vector2(_horizontalSpeed, VerticalSpeed);
+    private void ApplySpeed() => _rigidbody.velocity = new Vector2(_horizontalSpeed, VerticalSpeed);
 
-    private void Jump() => _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+    private void Jump(float jumpForce) => _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -42,11 +42,11 @@ public class Player : MonoBehaviour
 
         if (coin)
         {
-            CollectCoin(coin);
+            AddCoin(coin);
         }
     }
 
-    private void CollectCoin(Coin coin)
+    private void AddCoin(Coin coin)
     {
         ChangeCoinsAmount(coin.Value);
 

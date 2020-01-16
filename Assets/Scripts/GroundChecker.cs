@@ -6,5 +6,5 @@ public class GroundChecker : MonoBehaviour
     [SerializeField] private Transform _bottomPoint;
     [SerializeField] private float _checkDistance = 0.02f;
 
-    public bool CanJump() => Physics2D.OverlapCircle(_bottomPoint.position, _checkDistance, _ground) != null;
+    public bool IsOnGround() => Physics2D.OverlapCircle(_bottomPoint.position, _checkDistance, _ground) != null;
 }
